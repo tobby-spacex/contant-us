@@ -2,6 +2,7 @@
 
 declare(strict_types = 1);
 
+use App\Models\ContactUsModel;
 use App\Controllers\ContactUsController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -25,8 +26,9 @@ switch($urlRequest) {
 
     case '/contact-us/store':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userController = new ContactUsController();
-            $userController->store($_POST);
+            $contactModel = new ContactUsModel;
+            $contactController = new ContactUsController($contactModel);
+            $contactController->store($_POST);
         }
         break;
 
