@@ -62,7 +62,7 @@
 
   <div class="col-md-3">
     <label>Location: </label>
-    <select class="form-select" name="options" aria-label="Default select example">
+    <select class="form-select" name="location" aria-label="Default select example">
     <option value="Moscow">Moscow</option>
     <option value="Saint Petersburg">Saint Petersburg</option>
     <option value="Ulyanovsk">Ulyanovsk</option>
