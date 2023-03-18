@@ -17,8 +17,8 @@ class ContactUsController
 
     public function store()
     {
-        $this->contactModel->register($_POST);
-        return header('Location: /'); 
+        $this->contactModel->register($_POST, $_FILES);
+        return header('Location: /success-page'); 
     }
     
     public function showAll()

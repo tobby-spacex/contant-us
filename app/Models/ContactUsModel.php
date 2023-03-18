@@ -9,23 +9,35 @@ use App\Models\Model;
 
 class ContactUsModel extends Model
 {
-    public function register(array $contactData)
+    public function register(array $contactData, array $file)
     {
-        // var_dump($contactData);
-        $name = $contactData['name'];
-        $surename = $contactData['surename'];
-        $email = $contactData['email'];
-        $file = $contactData['file'];
-        $comment = $contactData['comment'];
-        $gender = $contactData['gender'];
-        $options = $contactData['options'];
-
         $stmt = $this->pdo->prepare(
             'INSERT INTO contact (name, surename, email, file, comments, gender, options) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)'
+             VALUES (:name, :surname, :email, :file, :comments, :gender, :options)'
         );
 
-        $stmt->execute([$name , $surename, $email, $file, $comment, $gender, $options]);
+        // Check if file type is valid
+        $allowedTypes = array('image/jpeg', 'image/png', 'application/pdf', 'text/plain', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint', 'application/zip', 'application/x-rar-compressed', 'application/octet-stream');
+        if (in_array($file['file']['type'], $allowedTypes)) {
+            $fileData = file_get_contents($file["file"]["tmp_name"]);
+        } else {
+            // handle invalid file type
+            return false;
+        }
+
+        $fileData = basename($file["file"]["name"]);
+        $fileData = file_get_contents($file["file"]["tmp_name"]);
+
+        $stmt->bindParam(':name', $contactData['name']);
+        $stmt->bindParam(':surname', $contactData['surname']);
+        $stmt->bindParam(':email', $contactData['email']);
+        $stmt->bindParam(':file', $fileData, PDO::PARAM_LOB);
+        $stmt->bindParam(':comments', $contactData['comment']);
+        $stmt->bindParam(':gender', $contactData['gender']);
+        $stmt->bindParam(':options', $contactData['options']);
+    
+        $stmt->execute();
+    
         return $this->pdo->lastInsertId();
     }
 

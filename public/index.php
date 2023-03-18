@@ -36,6 +36,10 @@ switch($urlRequest) {
         include_once '../app/views/contact/results/message.php';
         break;
 
+    case '/success-page':
+        include_once '../app/views/contact/results/success-page.php';
+        break;    
+
     default:
         http_response_code(404);
         include_once '../app/views/404.php';

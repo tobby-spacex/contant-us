@@ -1,7 +1,7 @@
 <?php include_once  trim(str_replace("public", "", VIEW_PATH)) . "/app/views/partials/_header.php"; ?>
 
 <div class="container">
-<form class="row g-3 needs-validation" action="contact-us/store" method="post" novalidate>
+<form class="row g-3 needs-validation" action="contact-us/store" method="post" enctype="multipart/form-data" novalidate>
   <div class="col-md-4">
     <label for="validationCustom01" class="form-label">First name</label>
     <input type="text" name="name" class="form-control" id="validationCustom01" required>
@@ -41,7 +41,7 @@
 
   <div class="col-md-3">
    <label class="form-label" for="customFile">Default file input example</label>
-   <input name="file" type="file" class="form-control" id="customFile" />
+   <input name="file" type="file" class="form-control" id="file" />
   </div>
 
   <div class="col-md-3">
