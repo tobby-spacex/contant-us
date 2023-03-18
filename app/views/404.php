@@ -1,6 +1,5 @@
 <?php include_once "partials/_header.php"; ?>
 
-<?php echo 'The username is: ' .$_ENV["DB_DATABASE"] . '!'; ?>
 <div class="d-flex align-items-center justify-content-center vh-100">
     <div class="text-center">
         <h1 class="display-1 fw-bold">404</h1>

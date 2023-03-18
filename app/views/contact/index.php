@@ -4,7 +4,7 @@
 <form class="row g-3 needs-validation" action="contact-us/store" method="post" novalidate>
   <div class="col-md-4">
     <label for="validationCustom01" class="form-label">First name</label>
-    <input type="text" name="name" class="form-control" id="validationCustom01" value="John" required>
+    <input type="text" name="name" class="form-control" id="validationCustom01" required>
     <div class="valid-feedback">
       Looks good!
     </div>
@@ -12,7 +12,7 @@
 
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Last name</label>
-    <input type="text" name="surename" class="form-control" id="validationCustom02" value="Doe" required>
+    <input type="text" name="surename" class="form-control" id="validationCustom02" required>
     <div class="valid-feedback">
       Looks good!
     </div>
@@ -22,9 +22,9 @@
     <label for="validationCustomUsername" class="form-label">Email</label>
     <div class="input-group has-validation">
       <span class="input-group-text" id="inputGroupPrepend">@</span>
-      <input type="text" name="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+      <input type="email" name="email" class="form-control" id="email" aria-describedby="inputGroupPrepend" required>
       <div class="invalid-feedback">
-        Please choose a username.
+        Please enter your email.
       </div>
     </div>
   </div>
@@ -32,7 +32,10 @@
   <div class="col-md-6">
     <div class="form-group">
     <label for="comment">Comment:</label>
-    <textarea name="comment" class="form-control" rows="5" id="comment"></textarea>
+    <textarea name="comment" class="form-control" rows="5" id="comment" required></textarea>
+      <div class="invalid-feedback">
+        Please let us know what's on your mind.
+      </div>
     </div>
    </div>
 
@@ -58,10 +61,12 @@
   </div>
 
   <div class="col-md-3">
+    <label>Location: </label>
     <select class="form-select" name="options" aria-label="Default select example">
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
+    <option value="Moscow">Moscow</option>
+    <option value="Saint Petersburg">Saint Petersburg</option>
+    <option value="Ulyanovsk">Ulyanovsk</option>
+    <option value="Other">Other</option>
     </select>
   </div>
 

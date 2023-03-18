@@ -32,6 +32,10 @@ switch($urlRequest) {
         }
         break;
 
+    case '/form-details':
+        include_once '../app/views/contact/results/message.php';
+        break;
+
     default:
         http_response_code(404);
         include_once '../app/views/404.php';

@@ -20,4 +20,9 @@ class ContactUsController
         $this->contactModel->register($_POST);
         return header('Location: /'); 
     }
+    
+    public function showAll()
+    {
+        return $this->contactModel->fetchAll();
+    }
 }

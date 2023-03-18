@@ -4,11 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use PDO;
 use App\Models\Model;
 
 class ContactUsModel extends Model
 {
-    public function register(array $contactData) 
+    public function register(array $contactData)
     {
         // var_dump($contactData);
         $name = $contactData['name'];
@@ -26,5 +27,17 @@ class ContactUsModel extends Model
 
         $stmt->execute([$name , $surename, $email, $file, $comment, $gender, $options]);
         return $this->pdo->lastInsertId();
+    }
+
+    public function fetchAll()
+    {
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM contact'
+        );
+
+        $stmt->execute();
+        $formData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $formData ? $formData : [];
     }
 }
