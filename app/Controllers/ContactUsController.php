@@ -59,9 +59,10 @@ class ContactUsController
                     $mailSender = new MailSender($_ENV['ADMIN_EMAIL'], $mailSubject, serialize($submitedData), $headers);
                     $mailSender->send();
                 }
-            } catch (\Throwable $th) {
-                //throw $th;
+            } catch (\Exception $e) {
+                echo 'Message: ' .$e->getMessage();
             }
+            
             return header('Location: /success-page'); 
         }
     }
