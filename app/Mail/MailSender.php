@@ -6,12 +6,14 @@ namespace App\Mail;
 
 class MailSender
 {
+    protected $sendto;
     protected $subject;
     protected $message;
     protected $headers;
 
-    public function __construct($subject, $message, $headers = '')
+    public function __construct($sendto, $subject, $message, $headers = '')
     {
+        $this->sendto = $sendto;
         $this->subject = $subject;
         $this->message = $message;
         $this->headers = $headers;
@@ -19,6 +21,6 @@ class MailSender
 
     public function send()
     {
-        return mail($_ENV['ADMIN_EMAIL'], $this->subject, $this->message, $this->headers);
+        return mail($this->sendto, $this->subject, $this->message, $this->headers);
     }
 }

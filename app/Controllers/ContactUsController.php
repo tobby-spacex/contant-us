@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Controllers;
 
+use App\Mail\MailSender;
 use App\Models\ContactUsModel;
 
 class ContactUsController
@@ -50,7 +51,17 @@ class ContactUsController
 
             $submitedData = array_merge($submitedPost, $file);
 
-            $this->contactModel->register($submitedData);
+            try {
+                if($this->contactModel->register($submitedData)) {
+                    $mailSubject = 'This is contact us form data';
+                    $email = 'w.wallace@gmail.com';
+                    $headers = "From: $email\r\nReply-To: $email\r\n";
+                    $mailSender = new MailSender($_ENV['ADMIN_EMAIL'], $mailSubject, serialize($submitedData), $headers);
+                    $mailSender->send();
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
             return header('Location: /success-page'); 
         }
     }
