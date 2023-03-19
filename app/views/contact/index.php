@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <?php include_once  trim(str_replace("public", "", VIEW_PATH)) . "/app/views/partials/_header.php"; ?>
 
 <div class="container">
@@ -8,6 +10,12 @@
     <div class="valid-feedback">
       Looks good!
     </div>
+
+    <?php if(!empty($_SESSION['errors']['name_error'])): ?>
+      <div class="alert alert-danger" role="alert">
+         Please, insert valid name
+      </div>
+    <?php endif; ?>  
   </div>
 
   <div class="col-md-4">
@@ -23,9 +31,15 @@
     <div class="input-group has-validation">
       <span class="input-group-text" id="inputGroupPrepend">@</span>
       <input type="email" name="email" class="form-control" id="email" aria-describedby="inputGroupPrepend" required>
-      <div class="invalid-feedback">
-        Please enter your email.
+      <div class="valid-feedback">
+         Looks good!
       </div>
+
+      <?php if(!empty($_SESSION['errors']['email_error'])): ?>
+        <div class="alert alert-danger" role="alert">
+         Please, insert valid email
+      </div>
+    <?php endif; ?>  
     </div>
   </div>
 
@@ -89,5 +103,7 @@
 
 </form>
 </div>
+
+<?php session_destroy(); ?>
 
 <?php include_once  trim(str_replace("public", "", VIEW_PATH)) . "/app/views/partials/_footer.php"; ?>

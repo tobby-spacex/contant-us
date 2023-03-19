@@ -9,7 +9,7 @@ use App\Models\Model;
 
 class ContactUsModel extends Model
 {
-    public function register(array $contactData)
+    public function register(array $contactData): string|false
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO contact (name, surename, email, file, comments, gender, options) 
@@ -17,7 +17,7 @@ class ContactUsModel extends Model
         );
 
         $stmt->bindParam(':name', $contactData['name']);
-        $stmt->bindParam(':surname', $contactData['surname']);
+        $stmt->bindParam(':surname', $contactData['surename']);
         $stmt->bindParam(':email', $contactData['email']);
         $stmt->bindParam(':file', $contactData['file'], PDO::PARAM_LOB);
         $stmt->bindParam(':comments', $contactData['comment']);
@@ -29,7 +29,7 @@ class ContactUsModel extends Model
         return $this->pdo->lastInsertId();
     }
 
-    public function fetchAll()
+    public function fetchAll(): array
     {
         $stmt = $this->pdo->prepare(
             'SELECT * FROM contact'

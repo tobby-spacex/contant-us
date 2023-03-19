@@ -40,7 +40,8 @@ use App\Controllers\ContactUsController;
             echo '<td>' . $row['name'] . '</td>';
             echo '<td>' . $row['surename'] . '</td>';
             echo '<td>' . $row['email'] . '</td>';
-            echo '<td><a href="data:application/octet-stream;base64,' . base64_encode($row['file']) . '" download="contact-us-file">Download </a></td>';
+            echo '<td><a href="data:application/octet-stream;base64,' . base64_encode($row['file']) . 
+            '" download="contact-us-file">Download </a></td>';
             echo '<td>' . $row['comments'] . '</td>';
             echo '<td>' . $row['gender'] . '</td>';
             echo '<td>' . $row['options'] . '</td>';
