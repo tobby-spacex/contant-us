@@ -11,17 +11,16 @@ $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
 $urlRequest = $_SERVER['REQUEST_URI'];
-
 define('VIEW_PATH', __DIR__ );
 
-switch($urlRequest) {
+switch ($urlRequest) {
     case '':
     case '/':
-        include_once '../app/views/index.php';
+        $viewPath = '../app/views/index.php';
         break;
     
     case '/contact-us':
-        include_once '../app/views/contact/index.php';
+        $viewPath = '../app/views/contact/index.php';
         break;
 
     case '/contact-us/store':
@@ -29,19 +28,25 @@ switch($urlRequest) {
             $contactModel = new ContactUsModel;
             $contactController = new ContactUsController($contactModel);
             $contactController->store($_POST);
+            $viewPath = '../app/views/contact/results/message.php';
+        } else {
+            http_response_code(405);
+            $viewPath = '../app/views/405.php';
         }
         break;
-
+    
     case '/form-details':
-        include_once '../app/views/contact/results/message.php';
+        $viewPath = '../app/views/contact/results/message.php';
         break;
 
     case '/success-page':
-        include_once '../app/views/contact/results/success-page.php';
-        break;    
+        $viewPath = '../app/views/contact/results/success-page.php';
+        break;
 
     default:
         http_response_code(404);
-        include_once '../app/views/404.php';
-        break;    
+        $viewPath = '../app/views/404.php';
+        break;
 }
+
+include_once $viewPath;

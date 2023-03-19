@@ -13,6 +13,10 @@ class ContactUsController
 {
     private $contactModel;
 
+    private $submitedPost;
+
+    private $submitedData;
+
     public function __construct(ContactUsModel $contactModel)
     {
         $this->contactModel = $contactModel;
@@ -21,18 +25,6 @@ class ContactUsController
     public function store()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            // Check if file type is valid
-            $allowedFileTypes = array('image/jpeg', 'image/png', 'application/pdf', 
-            'text/plain', 'application/vnd.ms-excel', 'application/zip');
-
-            if (in_array($_FILES['file']['type'], $allowedFileTypes)) {
-                $fileData = basename($_FILES["file"]["name"]);
-                $fileData = file_get_contents($_FILES["file"]["tmp_name"]);
-            }
-            
-            // $fileData = basename($_FILES["file"]["name"]);
-            // $fileData = file_get_contents($_FILES["file"]["tmp_name"]);
 
             // Validate name field
             if (empty($_POST['name'])) {
@@ -53,18 +45,32 @@ class ContactUsController
                 return header('Location: /contact-us');
             }
 
-            $submitedPost = $_POST;
-            $file['file'] = $fileData;
+            $this->submitedPost = $_POST;
+            $this->submitedData = $this->submitedPost;;
 
-            $submitedData = array_merge($submitedPost, $file);
-            $lastInsertId = $this->contactModel->register($submitedData);
+            // Check if file type is valid
+            $allowedFileTypes = array('image/jpeg', 'image/png', 'application/pdf', 
+            'text/plain', 'application/vnd.ms-excel', 'application/zip');
+
+            if(isset($_FILES['file']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
+                if (in_array($_FILES['file']['type'], $allowedFileTypes)) {
+                    $fileData = basename($_FILES["file"]["name"]);
+                    $fileData = file_get_contents($_FILES["file"]["tmp_name"]);
+                }
+
+                $file['file'] = $fileData;
+
+                $this->submitedData = array_merge($this->submitedPost, $file);
+            }
+
+            $lastInsertId = $this->contactModel->register($this->submitedData);
 
             try {
                 if($lastInsertId) {
                     $mailSubject = 'This is contact us form data';
                     $email = 'w.wallace@gmail.com';
                     $headers = "From: $email\r\nReply-To: $email\r\n";
-                    $mailSender = new MailSender($_ENV['ADMIN_EMAIL'], $mailSubject, serialize($submitedData), $headers);
+                    $mailSender = new MailSender($_ENV['ADMIN_EMAIL'], $mailSubject, serialize($this->submitedData), $headers);
                     $mailSender->send();
 
                     return header('Location: /success-page'); 
