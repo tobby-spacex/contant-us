@@ -44,7 +44,7 @@ use App\Controllers\ContactUsController;
             '" download="contact-us-file">Download </a></td>';
             echo '<td>' . $row['comments'] . '</td>';
             echo '<td>' . $row['gender'] . '</td>';
-            echo '<td>' . $row['options'] . '</td>';
+            echo '<td>' . $row['location'] . '</td>';
             echo '</tr>';
         }
     ?>

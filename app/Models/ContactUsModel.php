@@ -12,8 +12,8 @@ class ContactUsModel extends Model
     public function register(array $contactData): string|false
     {
         $stmt = $this->pdo->prepare(
-            'INSERT INTO contact (name, surename, email, file, comments, gender, options) 
-             VALUES (:name, :surname, :email, :file, :comments, :gender, :options)'
+            'INSERT INTO contact_form (name, surename, email, file, comments, gender, location) 
+             VALUES (:name, :surname, :email, :file, :comments, :gender, :location)'
         );
 
         $stmt->bindParam(':name', $contactData['name']);
@@ -22,7 +22,7 @@ class ContactUsModel extends Model
         $stmt->bindParam(':file', $contactData['file'], PDO::PARAM_LOB);
         $stmt->bindParam(':comments', $contactData['comment']);
         $stmt->bindParam(':gender', $contactData['gender']);
-        $stmt->bindParam(':options', $contactData['location']);
+        $stmt->bindParam(':location', $contactData['location']);
     
         $stmt->execute();
     
@@ -32,7 +32,7 @@ class ContactUsModel extends Model
     public function fetchAll(): array
     {
         $stmt = $this->pdo->prepare(
-            'SELECT * FROM contact'
+            'SELECT * FROM contact_form'
         );
 
         $stmt->execute();
