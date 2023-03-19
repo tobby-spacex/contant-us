@@ -3,6 +3,11 @@
 <?php include_once  trim(str_replace("public", "", VIEW_PATH)) . "/app/views/partials/_header.php"; ?>
 
 <div class="container">
+<blockquote class="blockquote text-center mt-4 mb-4">
+  <p class="mb-0 text-info">Leaving a message is not just a communication formality, it's an opportunity to make a lasting impression.</p>
+  <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+</blockquote>
+
 <form class="row g-3 needs-validation" action="contact-us/store" method="post" enctype="multipart/form-data" novalidate>
   <div class="col-md-4">
     <label for="validationCustom01" class="form-label">First name</label>
