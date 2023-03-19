@@ -12,7 +12,7 @@ class ContactUsModel extends Model
     public function register(array $contactData): string|false
     {
         $stmt = $this->pdo->prepare(
-            'INSERT INTO contact_form (name, surename, email, file, comments, gender, location) 
+            'INSERT INTO contact_form2 (name, surname, email, file, comments, gender, location) 
              VALUES (:name, :surname, :email, :file, :comments, :gender, :location)'
         );
 
@@ -32,7 +32,7 @@ class ContactUsModel extends Model
     public function fetchAll(): array
     {
         $stmt = $this->pdo->prepare(
-            'SELECT * FROM contact_form'
+            'SELECT * FROM contact_form2'
         );
 
         $stmt->execute();

@@ -40,7 +40,7 @@ use App\Controllers\ContactUsController;
         foreach ($contactController->showAll() as $row) {
             echo '<tr>';
             echo '<td>' . $row['name'] . '</td>';
-            echo '<td>' . $row['surename'] . '</td>';
+            echo '<td>' . $row['surname'] . '</td>';
             echo '<td>' . $row['email'] . '</td>';
             if(!empty($row['file'])) {
               echo '<td><a href="data:application/octet-stream;base64,' . base64_encode($row['file']) . 

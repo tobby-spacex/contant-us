@@ -21,6 +21,8 @@ class MailSender
 
     public function send()
     {
-        return mail($this->sendto, $this->subject, $this->message, $this->headers);
+        $message = str_replace("\0", "", $this->message);
+
+        return mail($this->sendto, $this->subject, $message, $this->headers);
     }
 }
