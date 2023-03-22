@@ -4,25 +4,42 @@ declare(strict_types = 1);
 
 namespace App\Mail;
 
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+
 class MailSender
 {
-    protected $sendto;
-    protected $subject;
-    protected $message;
-    protected $headers;
-
-    public function __construct($sendto, $subject, $message, $headers = '')
+    public static function mailTransporter($email): void
     {
-        $this->sendto = $sendto;
-        $this->subject = $subject;
-        $this->message = $message;
-        $this->headers = $headers;
+        $transport = Transport::fromDsn($_ENV['MAILER_DSN']);
+        $mailer = new Mailer($transport);
+        $mailer->send($email);
     }
 
-    public function send()
+    public function sendMail($data, $file): void
     {
-        $message = str_replace("\0", "", $this->message);
+       // Convert the input data to UTF-8
+       $utf8Data = mb_convert_encoding($data, 'UTF-8', 'auto');
 
-        return mail($this->sendto, $this->subject, $message, $this->headers);
+       // Encode the data as JSON
+       $jsonData = json_encode($utf8Data, JSON_PRETTY_PRINT);
+
+        if ($jsonData === false) {
+            echo 'JSON encode failed: ' . json_last_error_msg();
+            return;
+        }
+
+        $htmlData = htmlspecialchars($jsonData);
+
+        $email = (new Email())
+            ->from($_ENV['SUPPORT_EMAIL'])
+            ->to($_ENV['ADMIN_EMAIL'])
+            ->subject('New message from contact us!')
+            ->text($jsonData)
+            ->html($htmlData)
+            ->attachFromPath($file, 'attachment-file');
+
+        self::mailTransporter($email);
     }
 }

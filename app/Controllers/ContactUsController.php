@@ -56,6 +56,7 @@ class ContactUsController
                 if (in_array($_FILES['file']['type'], $allowedFileTypes)) {
                     $fileData = basename($_FILES["file"]["name"]);
                     $fileData = file_get_contents($_FILES["file"]["tmp_name"]);
+                    $attachmentPath = $_FILES['file']['tmp_name'];
                 }
 
                 $file['file'] = $fileData;
@@ -67,11 +68,14 @@ class ContactUsController
 
             try {
                 if($lastInsertId) {
-                    $mailSubject = 'This is contact us form data';
-                    $email = 'w.wallace@gmail.com';
-                    $headers = "From: $email\r\nReply-To: $email\r\n";
-                    $mailSender = new MailSender($_ENV['ADMIN_EMAIL'], $mailSubject, serialize($this->submitedData), $headers);
-                    $mailSender->send();
+                    // $mailSubject = 'This is contact us form data';
+                    // $email = 'w.wallace@gmail.com';
+                    // $headers = "From: $email\r\nReply-To: $email\r\n";
+                    // $mailSender = new MailSender($_ENV['ADMIN_EMAIL'], $mailSubject, serialize($this->submitedData), $headers);
+                    // $mailSender->send();
+
+                    $mailer = new MailSender();
+                    $mailer->sendMail($this->submitedData, $attachmentPath);
 
                     return header('Location: /success-page'); 
                 }
