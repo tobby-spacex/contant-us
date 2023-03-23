@@ -15,7 +15,9 @@
     <div class="valid-feedback">
       Looks good!
     </div>
-
+      <div class="invalid-feedback">
+        Cannot be an empty name
+      </div>
     <?php if(!empty($_SESSION['errors']['name_error'])): ?>
       <div class="alert alert-danger" role="alert">
          Please, insert valid name
@@ -26,6 +28,9 @@
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Last name</label>
     <input type="text" name="surename" class="form-control" id="validationCustom02" required>
+    <div class="invalid-feedback">
+        Cannot be an empty surname
+      </div>
     <div class="valid-feedback">
       Looks good!
     </div>
@@ -40,6 +45,9 @@
          Looks good!
       </div>
 
+      <div class="invalid-feedback">
+        Cannot be an empty email
+      </div>
       <?php if(!empty($_SESSION['errors']['email_error'])): ?>
         <div class="alert alert-danger" role="alert">
          Please, insert valid email
