@@ -11474,7 +11474,7 @@ header.masthead h1, header.masthead .h1 {
   padding: 10px;
   background: #e9ebed;
   background-clip: padding-box;
-  font-size: smaller;
+  font-size: 10px;
 }
 
 .paragraph-content {

@@ -77,8 +77,8 @@
    </div>
 
   <div class="col-md-3">
-   <label class="form-label" for="customFile">Default file input example</label>
-   <input name="file" type="file" class="form-control" id="file" />
+   <label class="form-label" for="customFile">We accept only PDF file</label>
+   <input name="file" type="file" class="form-control" id="file" accept=".pdf"/>
   </div>
 
   <div class="col-md-3">
@@ -109,11 +109,11 @@
 
   <div class="col-12">
   <div class="col-md-6 paragraph-content">
-    <p class="terms-paragraph">I agree that my data can be processed and stored in the company's database</p>
+    <p class="terms-paragraph">I agree that my data can be processed and stored in the company's database for 6 months.</p>
   </div>
 
     <div class="form-check">
-      <input class="form-check-input" name="agreement" type="checkbox" value="" id="invalidCheck" required>
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
       <label class="form-check-label" for="invalidCheck">
         Agree to terms and conditions
       </label>

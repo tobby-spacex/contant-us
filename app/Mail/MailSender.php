@@ -17,7 +17,7 @@ class MailSender
         $mailer->send($email);
     }
 
-    public function sendMail($data, $file): void
+    public function sendMail($data, $file=null): void
     {
        // Convert the input data to UTF-8
        $utf8Data = mb_convert_encoding($data, 'UTF-8', 'auto');
@@ -37,8 +37,12 @@ class MailSender
             ->to($_ENV['ADMIN_EMAIL'])
             ->subject('New message from contact us!')
             ->text($jsonData)
-            ->html($htmlData)
-            ->attachFromPath($file, 'attachment-file');
+            ->html($htmlData);
+
+            // Check if $file is not null, and attach it if it is not
+            if ($file !== null) {
+                $email->attachFromPath($file, 'attachment-file');
+            }
 
         self::mailTransporter($email);
     }

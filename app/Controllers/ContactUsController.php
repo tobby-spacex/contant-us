@@ -49,8 +49,7 @@ class ContactUsController
             $this->submitedData = $this->submitedPost;;
 
             // Check if file type is valid
-            $allowedFileTypes = array('image/jpeg', 'image/png', 'application/pdf', 
-            'text/plain', 'application/vnd.ms-excel', 'application/zip');
+            $allowedFileTypes = array('application/pdf');
 
             if(isset($_FILES['file']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
                 if (in_array($_FILES['file']['type'], $allowedFileTypes)) {
@@ -68,15 +67,13 @@ class ContactUsController
 
             try {
                 if($lastInsertId) {
-                    // $mailSubject = 'This is contact us form data';
-                    // $email = 'w.wallace@gmail.com';
-                    // $headers = "From: $email\r\nReply-To: $email\r\n";
-                    // $mailSender = new MailSender($_ENV['ADMIN_EMAIL'], $mailSubject, serialize($this->submitedData), $headers);
-                    // $mailSender->send();
-
                     $mailer = new MailSender();
-                    $mailer->sendMail($this->submitedData, $attachmentPath);
-
+                    if (isset($attachmentPath)) {
+                        $mailer->sendMail($this->submitedData, $attachmentPath);
+                    } else {
+                        $mailer->sendMail($this->submitedData);
+                    }
+                    
                     return header('Location: /success-page'); 
                 }
             } catch (\Exception $e) {
