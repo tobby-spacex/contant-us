@@ -36,10 +36,13 @@ Connect to Mysql database wich is running in docker container  (it's easier to c
     - Port: 3307
     - Password: root
 
+Create database Schema, use datadump to insert the table with sample data into your database.
+
 Insert your database name in .env file (DB_DATABASE)
 
 # Using the project
 
-The project consists of three pages, a landing page, a form submission page and a page with all the results.
+The project consists of three main pages, a landing page, a form submission page and a page with all the results. (also success page and 404 page)
 
-In the project configured an email-testing tool MailHog. It gives possibility to test that outgoing emails from your app or website actually end up in the recipient’s mailbox. After each form submission you can open the the url http://localhost:8025/ and test your sended form data.
+In the project configured an email-testing tool MailHog. It gives possibility to test that outgoing emails from your app or website actually end up in the recipient’s mailbox. After each form submission you can open the the url http://localhost:8025/ and test your sended form data. 
+Uploaded file you can see in the MIME section.
