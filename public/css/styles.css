@@ -11460,3 +11460,23 @@ header.masthead h1, header.masthead .h1 {
 .landing-page-header {
   background-color: #066173;
 }
+
+.contact-us {
+  max-width:1140px;
+}
+
+.messages-table {
+  font-size: smaller;
+}
+
+.terms-paragraph {
+  border: 2px dashed #ced4da;
+  padding: 10px;
+  background: #e9ebed;
+  background-clip: padding-box;
+  font-size: smaller;
+}
+
+.paragraph-content {
+  padding-left: unset;
+}

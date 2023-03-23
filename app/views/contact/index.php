@@ -2,11 +2,21 @@
 
 <?php include_once  trim(str_replace("public", "", VIEW_PATH)) . "/app/views/partials/_header.php"; ?>
 
-<div class="container">
-<blockquote class="blockquote text-center mt-4 mb-4">
-  <p class="mb-0 text-info">Leaving a message is not just a communication formality, it's an opportunity to make a lasting impression.</p>
-  <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-</blockquote>
+<div class="container contact-us">
+
+<figure class="text-center mb-0 mt-3">
+    <blockquote class="blockquote">
+      <p class="pb-3">
+        <i class="fas fa-quote-left fa-xs text-primary"></i>
+        <span class="lead font-italic">Many of life's failures are people who did not realize how close they were to success 
+          when they wanted to contact us, but never got in touch</span>
+        <i class="fas fa-quote-right fa-xs text-primary"></i>
+      </p>
+    </blockquote>
+    <figcaption class="blockquote-footer mb-0">
+        Unknown Author
+    </figcaption>
+</figure>
 
 <form class="row g-3 needs-validation" action="contact-us/store" method="post" enctype="multipart/form-data" novalidate>
   <div class="col-md-4">
@@ -98,6 +108,10 @@
   </div>
 
   <div class="col-12">
+  <div class="col-md-6 paragraph-content">
+    <p class="terms-paragraph">I agree that my data can be processed and stored in the company's database</p>
+  </div>
+
     <div class="form-check">
       <input class="form-check-input" name="agreement" type="checkbox" value="" id="invalidCheck" required>
       <label class="form-check-label" for="invalidCheck">

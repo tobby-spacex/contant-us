@@ -11,7 +11,7 @@ use App\Controllers\ContactUsController;
 
 <?php include_once  trim(str_replace("public", "", VIEW_PATH)) . "/app/views/partials/_header.php"; ?>
 
-<div class="container">
+<div class="container messages-table">
     <div class="container text-center bg-secondary text-white pt-3 pb-3 mt-1 mb-2">
       <h3>Here you can see all messages which was sent from contact us form.</h3>
     </div>
